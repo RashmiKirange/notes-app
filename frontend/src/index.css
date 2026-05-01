@@ -1,0 +1,202 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  height: 100vh;
+}
+
+#root { height: 100vh; }
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  min-width: 300px;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #2d2d44;
+}
+
+.sidebar-header {
+  padding: 20px 16px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #2d2d44;
+}
+
+.sidebar-header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.note-count {
+  background: #4f46e5;
+  color: #fff;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.note-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 16px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.error-banner {
+  background: #7f1d1d;
+  color: #fca5a5;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+}
+
+/* Note Card */
+.note-card {
+  position: relative;
+  background: #16213e;
+  border-radius: 8px;
+  padding: 12px 36px 12px 12px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.note-card:hover { background: #1e2952; border-color: #4f46e5; }
+.note-card.active { background: #1e2952; border-color: #4f46e5; }
+
+.note-card-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-card-preview {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  margin-top: 4px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.note-card-meta {
+  font-size: 0.7rem;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+.note-delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.note-delete-btn:hover { color: #ef4444; background: rgba(239,68,68,0.1); }
+
+/* Main / Editor */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.editor-toolbar {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s;
+}
+
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary { background: #4f46e5; color: #fff; }
+.btn-primary:not(:disabled):hover { background: #4338ca; }
+
+.btn-secondary { background: #e5e7eb; color: #374151; }
+.btn-secondary:hover { background: #d1d5db; }
+
+.editor-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #1a1a2e;
+  padding: 4px 0;
+  border-bottom: 2px solid #e5e7eb;
+  transition: border-color 0.2s;
+}
+
+.editor-title:focus { border-bottom-color: #4f46e5; }
+.editor-title::placeholder { color: #d1d5db; }
+
+.editor-content {
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.7;
+  border: none;
+  outline: none;
+  background: transparent;
+  resize: none;
+  color: #374151;
+}
+
+.editor-content::placeholder { color: #d1d5db; }
+
+.editor-meta {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  padding-top: 8px;
+  border-top: 1px solid #e5e7eb;
+}
