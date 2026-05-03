@@ -18,5 +18,6 @@ class NoteOut(BaseModel):
     content: str
     created_at: datetime
     updated_at: datetime
+    word_count: int
 
     model_config = {"from_attributes": True}

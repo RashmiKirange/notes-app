@@ -15,7 +15,7 @@ function NoteCard({ note, onSelect, onDelete, isActive }) {
       <div className="note-card-preview">
         {note.content ? note.content.slice(0, 80) + (note.content.length > 80 ? "…" : "") : "No content"}
       </div>
-      <div className="note-card-meta">{formatDate(note.updated_at)}</div>
+      <div className="note-card-meta">{formatDate(note.updated_at)} · {note.word_count} words</div>
       <button
         className="note-delete-btn"
         onClick={(e) => { e.stopPropagation(); onDelete(note.id); }}
@@ -31,10 +31,12 @@ function Editor({ note, onSave, onNew }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [saving, setSaving] = useState(false);
+  const [wordCount, setWordCount] = useState(0);
 
   useEffect(() => {
     setTitle(note?.title ?? "");
     setContent(note?.content ?? "");
+    setWordCount(note?.word_count ?? 0);
   }, [note]);
 
   async function handleSave() {
@@ -50,8 +52,10 @@ function Editor({ note, onSave, onNew }) {
   return (
     <div className="editor">
       <div className="editor-toolbar">
-        <button className="btn btn-secondary" onClick={onNew}>+ New Note</button>
-        <button className="btn btn-primary" onClick={handleSave} disabled={saving || !title.trim()}>
+        <button className="btn btn-secondary" onClick={onNew">
+          + New Note
+        </button>
+        <button className="btn btn-primary" onClick={handleSave} disabled={saving || !title.trim()">
           {saving ? "Saving…" : note ? "Update" : "Create"}
         </button>
       </div>
@@ -69,7 +73,7 @@ function Editor({ note, onSave, onNew }) {
       />
       {note && (
         <div className="editor-meta">
-          Created: {formatDate(note.created_at)} · Updated: {formatDate(note.updated_at)}
+          Created: {formatDate(note.created_at)} · Updated: {formatDate(note.updated_at)} · {wordCount} words
         </div>
       )}
     </div>
